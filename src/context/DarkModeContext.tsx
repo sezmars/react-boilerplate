@@ -1,15 +1,12 @@
 import React, { createContext, useContext, useEffect } from 'react';
 import { useLocalStorageState } from '../hooks/useLocalStorageState';
-import { PropsWithChildren } from '../types';
 
 const DarkModeContext = createContext<{
   isDarkMode: string;
   toggleDarkMode: { (): void } | null;
 }>({ isDarkMode: 'false', toggleDarkMode: null });
 
-const DarkModeProvider = ({
-  children,
-}: PropsWithChildren<React.JSX.Element>) => {
+const DarkModeProvider = ({ children }: { children: React.JSX.Element }) => {
   const [isDarkMode, setIsDarkMode] = useLocalStorageState(
     window.matchMedia('(prefers-color-scheme: dark)').matches,
     'isDarkMode'
