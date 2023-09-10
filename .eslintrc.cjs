@@ -21,5 +21,14 @@ module.exports = {
         "endOfLine": "auto"
       },
     ],
+    "prefer-arrow-callback": [
+      "error",
+      { "allowNamedFunctions": true }
+    ],
+    "func-style": [
+      "error",
+      "expression",
+      { "allowArrowFunctions": true }
+    ]
   },
 }
