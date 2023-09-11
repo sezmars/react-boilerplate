@@ -4,11 +4,10 @@ type ClickHandler = (event: MouseEvent) => void;
 
 export const useOutsideClick = (
   handler: ClickHandler,
-  listenCapturing = true
+  listenCapturing = true,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ): RefObject<any> => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const ref = useRef<any>(null);
+  const ref = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     const handleClick = (e: MouseEvent) => {
@@ -19,8 +18,7 @@ export const useOutsideClick = (
 
     document.addEventListener('click', handleClick, listenCapturing);
 
-    return () =>
-      document.removeEventListener('click', handleClick, listenCapturing);
+    return () => document.removeEventListener('click', handleClick, listenCapturing);
   }, [handler, listenCapturing]);
 
   return ref;
