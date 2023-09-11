@@ -28,3 +28,14 @@ export const getToday = function (options = { end: false }): string {
 
 export const formatCurrency = (value: number): string =>
   new Intl.NumberFormat('en', { style: 'currency', currency: 'USD' }).format(value);
+
+export const networkTypeDetect = () => {
+  const navigatorTyped = navigator as { connection?: { effectiveType?: string } } | undefined;
+
+  const type =
+    navigatorTyped && 'connection' in navigatorTyped
+      ? navigatorTyped.connection?.effectiveType
+      : console.error('The browser does not support the Network Information API.');
+
+  return type;
+};

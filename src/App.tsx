@@ -20,6 +20,7 @@ const Checkin = lazy(() => import('./pages/Checkin.tsx'));
 const AppLayout = lazy(() => import('./ui/AppLayout'));
 const PageNotFound = lazy(() => import('./pages/PageNotFound'));
 import SpinnerFullPage from './ui/SpinnerFullPage.tsx';
+import { networkTypeDetect } from './utils/helpers.ts';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -30,14 +31,17 @@ const queryClient = new QueryClient({
 });
 
 const App = () => {
+  const networkType = networkTypeDetect();
+
   return (
     <DarkModeProvider>
       <QueryClientProvider client={queryClient}>
         <ReactQueryDevtools initialIsOpen={false} />
 
         <GlobalStyles />
-        <BrowserRouter>
+        <BrowserRouter basename={import.meta.env.DEV ? '/' : '/react-boilerplate/'}>
           <Suspense fallback={<SpinnerFullPage />}>
+            {networkType === '4g' ? <SpinnerFullPage wifi={true} /> : <></>}
             <Routes>
               <Route
                 element={

@@ -17,7 +17,9 @@ const Img = styled.img`
 const Logo = () => {
   const { isDarkMode } = useDarkMode();
 
-  const src = isDarkMode ? '/logo-dark.png' : '/logo-light.png';
+  const logoPath = import.meta.env.DEV ? '/' : '/react-boilerplate/';
+
+  const src = isDarkMode ? `${logoPath}logo-dark.png` : `${logoPath}logo-light.png`;
 
   return (
     <StyledLogo>
