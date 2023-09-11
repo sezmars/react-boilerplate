@@ -41,7 +41,7 @@ const App = () => {
         <GlobalStyles />
         <BrowserRouter basename={import.meta.env.DEV ? '/' : '/react-boilerplate/'}>
           <Suspense fallback={<SpinnerFullPage />}>
-            {networkType === '4g' ? <SpinnerFullPage wifi={true} /> : <></>}
+            {networkType === '4g' && <SpinnerFullPage wifi={true} />}
             <Routes>
               <Route
                 element={
