@@ -51,7 +51,8 @@ const SignupForm = () => {
 
       <FormRow
         label="Password (min 8 characters)"
-        error={errors?.password?.message}>
+        error={errors?.password?.message}
+      >
         <Input
           type="password"
           id="password"
@@ -85,7 +86,8 @@ const SignupForm = () => {
           variation="secondary"
           type="reset"
           disabled={isLoading}
-          onClick={reset}>
+          onClick={reset}
+        >
           Cancel
         </Button>
         <Button disabled={isLoading}>Create new user</Button>

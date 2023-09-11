@@ -22,7 +22,8 @@ const UpdatePasswordForm = () => {
     <Form onSubmit={handleSubmit(onSubmit)}>
       <FormRow
         label="New password (min 8 chars)"
-        error={errors?.password?.message}>
+        error={errors?.password?.message}
+      >
         <Input
           type="password"
           id="password"
@@ -40,7 +41,8 @@ const UpdatePasswordForm = () => {
 
       <FormRow
         label="Confirm password"
-        error={errors?.passwordConfirm?.message}>
+        error={errors?.passwordConfirm?.message}
+      >
         <Input
           type="password"
           autoComplete="new-password"
