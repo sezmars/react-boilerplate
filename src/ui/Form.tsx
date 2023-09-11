@@ -22,7 +22,7 @@ const Form = styled.form<FormProps>`
       width: 80rem;
 
       @media (max-width: 768px) {
-        width: 20rem;
+        width: 30rem;
       }
     `}
 
@@ -37,6 +37,9 @@ const Form = styled.form<FormProps>`
   @media (max-width: 768px) {
     padding: 1rem;
     font-size: 1rem;
+
+    height: 400px;
+    overflow: scroll;
   }
 `;
 

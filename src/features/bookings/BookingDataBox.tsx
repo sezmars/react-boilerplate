@@ -67,6 +67,10 @@ const Guest = styled.div`
   margin-bottom: 1.6rem;
   color: var(--color-grey-500);
 
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+
   & p:first-of-type {
     font-weight: 500;
     color: var(--color-grey-700);
@@ -80,6 +84,10 @@ const Price = styled.div<PriceProps>`
   padding: 1.6rem 3.2rem;
   border-radius: var(--border-radius-sm);
   margin-top: 2.4rem;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 
   background-color: ${(props) => (props.isPaid ? 'var(--color-green-100)' : 'var(--color-yellow-100)')};
   color: ${(props) => (props.isPaid ? 'var(--color-green-700)' : 'var(--color-yellow-700)')};

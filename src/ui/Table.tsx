@@ -22,8 +22,8 @@ interface CommonRowProps {
 }
 
 const CommonRow = styled.div<CommonRowProps>`
-  display: grid;
-  grid-template-columns: ${(props) => props.columns};
+  justify-content: space-between;
+  display: flex;
   column-gap: 2.4rem;
   align-items: center;
   transition: none;
@@ -33,8 +33,8 @@ const CommonRow = styled.div<CommonRowProps>`
     justify-content: space-between;
   }
 
-  * {
-    width: fit-content;
+  *:not(img) {
+    min-width: 150px;
   }
 `;
 
