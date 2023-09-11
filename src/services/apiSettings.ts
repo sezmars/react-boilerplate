@@ -1,12 +1,9 @@
-import supabase from './supabase.js';
+import supabase from './supabase.ts';
 import { ISettings } from '../interfaces/settings.ts';
 import { Api } from '../utils/enums.ts';
 
 export const getSettings = async (): Promise<ISettings> => {
-  const { data, error } = await supabase
-    .from(Api.settings)
-    .select('*')
-    .single();
+  const { data, error } = await supabase.from(Api.settings).select('*').single();
 
   if (error) {
     console.error(error);

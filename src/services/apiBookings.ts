@@ -9,7 +9,7 @@ export const getBookings = async ({
   sortBy,
   page,
 }: {
-  filter: { field: string; value: string; method: string };
+  filter: { field: string; value: string; method?: string } | null;
   sortBy: { field: string; direction: string };
   page: number;
 }) => {
@@ -17,7 +17,7 @@ export const getBookings = async ({
     .from('bookings')
     .select(
       'id, created_at, startDate, endDate, numNights, numGuests, status, totalPrice, cabins(name), guests(fullName, email)',
-      { count: 'exact' }
+      { count: 'exact' },
     );
 
   // FILTER
@@ -48,11 +48,7 @@ export const getBookings = async ({
 };
 
 export const getBooking = async (id: string) => {
-  const { data, error } = await supabase
-    .from('bookings')
-    .select('*, cabins(*), guests(*)')
-    .eq('id', id)
-    .single();
+  const { data, error } = await supabase.from(Api.bookings).select('*, cabins(*), guests(*)').eq('id', id).single();
 
   if (error) {
     console.error(error);
@@ -100,9 +96,7 @@ export const getStaysTodayActivity = async () => {
   const { data, error } = await supabase
     .from('bookings')
     .select('*, guests(fullName, nationality, countryFlag)')
-    .or(
-      `and(status.eq.unconfirmed,startDate.eq.${getToday()}),and(status.eq.checked-in,endDate.eq.${getToday()})`
-    )
+    .or(`and(status.eq.unconfirmed,startDate.eq.${getToday()}),and(status.eq.checked-in,endDate.eq.${getToday()})`)
     .order('created_at');
 
   // Equivalent to this. But by querying this, we only download the data we actually need, otherwise we would need ALL bookings ever created
@@ -117,12 +111,7 @@ export const getStaysTodayActivity = async () => {
 };
 
 export const updateBooking = async (id: number, obj: Partial<IBooking>) => {
-  const { data, error } = await supabase
-    .from(Api.bookings)
-    .update(obj)
-    .eq('id', id)
-    .select()
-    .single();
+  const { data, error } = await supabase.from(Api.bookings).update(obj).eq('id', id).select().single();
 
   if (error) {
     console.error(error);
