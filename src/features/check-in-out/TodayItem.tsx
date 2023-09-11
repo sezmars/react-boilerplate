@@ -48,7 +48,8 @@ const TodayItem = ({ activity }: { activity: Partial<IBooking> }) => {
           size="small"
           variation="primary"
           as={Link}
-          to={`/checkin/${id}`}>
+          to={`/checkin/${id}`}
+        >
           Check in
         </Button>
       )}

@@ -7,6 +7,5 @@ export const useTodayActivity = () => {
     queryFn: getStaysTodayActivity,
     queryKey: [Api.todayActivity],
   });
-  console.log(activities);
   return { activities, isLoading };
 };

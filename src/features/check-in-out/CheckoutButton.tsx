@@ -9,7 +9,8 @@ const CheckoutButton = ({ bookingId }: { bookingId: number }) => {
       variation="primary"
       size="small"
       onClick={() => checkout(bookingId)}
-      disabled={isCheckingOut}>
+      disabled={isCheckingOut}
+    >
       Check out
     </Button>
   );
