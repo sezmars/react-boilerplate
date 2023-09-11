@@ -1,8 +1,8 @@
 import { TStatus } from '../utils/types.ts';
 
 export interface IGuests {
-  fullName?: string;
-  email?: string;
+  fullName: string;
+  email: string;
   country?: string;
   countryFlag?: string;
   nationalID?: string;
@@ -14,6 +14,7 @@ export interface IBooking {
   created_at: string | number | Date;
   startDate: string | number | Date;
   endDate: string;
+  fullName: string;
   cabinId: number;
   guestId: number;
   numNights: number;
@@ -25,11 +26,15 @@ export interface IBooking {
   observations: string;
   isPaid: boolean;
   guests?: IGuests;
-  cabins?: { name?: string }[];
+  cabins?: { name: string };
 }
 
 export interface IRecentBooking {
   created_at: string;
   extrasPrice: number;
   totalPrice: number;
+}
+
+export interface IStatus {
+  [key: string]: string;
 }
