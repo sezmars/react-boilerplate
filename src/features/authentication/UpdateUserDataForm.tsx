@@ -11,7 +11,7 @@ import { useUpdateUser } from './useUpdateUser';
 
 const UpdateUserDataForm = () => {
   const { user } = useUser();
-  console.log(user);
+
   const { updateUser, isUpdating } = useUpdateUser();
 
   const [fullName, setFullName] = useState(user?.user_metadata?.fullName);
