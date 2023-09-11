@@ -38,7 +38,6 @@ const App = () => {
         <GlobalStyles />
         <BrowserRouter>
           <Suspense fallback={<SpinnerFullPage />}>
-            <SpinnerFullPage />
             <Routes>
               <Route
                 element={
