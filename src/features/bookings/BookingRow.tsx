@@ -1,11 +1,6 @@
 import styled from 'styled-components';
 import { format, isToday } from 'date-fns';
-import {
-  HiArrowDownOnSquare,
-  HiArrowUpOnSquare,
-  HiEye,
-  HiTrash,
-} from 'react-icons/hi2';
+import { HiArrowDownOnSquare, HiArrowUpOnSquare, HiEye, HiTrash } from 'react-icons/hi2';
 import { useNavigate } from 'react-router-dom';
 
 import Tag from '../../ui/Tag';
@@ -14,12 +9,11 @@ import Modal from '../../ui/Modal';
 import Menus from '../../ui/Menus';
 import ConfirmDelete from '../../ui/ConfirmDelete';
 
-import { formatCurrency } from '../../utils/helpers';
-import { formatDistanceFromNow } from '../../utils/helpers';
+import { formatCurrency, formatDistanceFromNow } from '../../utils/helpers';
 import { useCheckout } from '../check-in-out/useCheckout';
 import { useDeleteBooking } from './useDeleteBooking';
 import { Status } from '../../utils/enums.ts';
-import { IBooking } from '../../interfaces/booking.ts';
+import { IStatus } from '../../interfaces/booking.ts';
 
 const Cabin = styled.div`
   font-size: 1.6rem;
@@ -48,27 +42,20 @@ const Amount = styled.div`
   font-weight: 500;
 `;
 
-const BookingRow = ({
-  booking: {
-    id: bookingId,
-    startDate,
-    endDate,
-    numNights,
-    totalPrice,
-    status,
-    guests: { fullName: guestName, email },
-    cabins: { name: cabinName },
-  },
-}: {
-  booking: Partial<IBooking>;
-}) => {
+/**
+ * Type error in Supabase library, expected object but declared as an array of object
+ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const BookingRow = ({ booking }: { booking: any }) => {
+  const { id: bookingId, startDate, endDate, numNights, totalPrice, status } = booking;
+  const { fullName: guestName, email } = booking.guests!;
+  const { name: cabinName } = booking.cabins!;
+
   const navigate = useNavigate();
   const { checkout, isCheckingOut } = useCheckout();
   const { deleteBooking, isDeleting } = useDeleteBooking();
 
-  //  const { status, id: bookingId }: { status: TStatus; id: number } = booking;
-
-  const statusToTagName = {
+  const statusToTagName: IStatus = {
     [Status.unconfirmed]: 'blue',
     [Status.checkedIn]: 'green',
     [Status.checkedOut]: 'silver',
@@ -95,8 +82,7 @@ const BookingRow = ({
           &rarr; {numNights} night stay
         </span>
         <span>
-          {format(new Date(startDate!), 'MMM dd yyyy')} &mdash;{' '}
-          {format(new Date(endDate!), 'MMM dd yyyy')}
+          {format(new Date(startDate!), 'MMM dd yyyy')} &mdash; {format(new Date(endDate!), 'MMM dd yyyy')}
         </span>
       </Stacked>
 
@@ -108,16 +94,12 @@ const BookingRow = ({
         <Menus.Menu>
           <Menus.Toggle id={bookingId!} />
           <Menus.List id={bookingId!}>
-            <Menus.Button
-              icon={<HiEye />}
-              onClick={() => navigate(`/bookings/${bookingId}`)}>
+            <Menus.Button icon={<HiEye />} onClick={() => navigate(`/bookings/${bookingId}`)}>
               See details
             </Menus.Button>
 
             {status === 'unconfirmed' ? (
-              <Menus.Button
-                icon={<HiArrowDownOnSquare />}
-                onClick={() => navigate(`/checkin/${bookingId}`)}>
+              <Menus.Button icon={<HiArrowDownOnSquare />} onClick={() => navigate(`/checkin/${bookingId}`)}>
                 Check in
               </Menus.Button>
             ) : (
@@ -125,10 +107,7 @@ const BookingRow = ({
             )}
 
             {status === 'checked-in' ? (
-              <Menus.Button
-                icon={<HiArrowUpOnSquare />}
-                onClick={() => checkout(+bookingId!)}
-                disabled={isCheckingOut}>
+              <Menus.Button icon={<HiArrowUpOnSquare />} onClick={() => checkout(+bookingId!)} disabled={isCheckingOut}>
                 Check out
               </Menus.Button>
             ) : (
@@ -142,11 +121,7 @@ const BookingRow = ({
         </Menus.Menu>
 
         <Modal.Window name="delete">
-          <ConfirmDelete
-            resourceName="booking"
-            disabled={isDeleting}
-            onConfirm={() => deleteBooking(bookingId)}
-          />
+          <ConfirmDelete resourceName="booking" disabled={isDeleting} onConfirm={() => deleteBooking(+bookingId!)} />
         </Modal.Window>
       </Modal>
     </Table.Row>
