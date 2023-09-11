@@ -1,13 +1,6 @@
 import styled from 'styled-components';
 import Heading from '../../ui/Heading';
-import {
-  Cell,
-  Legend,
-  Pie,
-  PieChart,
-  ResponsiveContainer,
-  Tooltip,
-} from 'recharts';
+import { Cell, Legend, Pie, PieChart, ResponsiveContainer, Tooltip } from 'recharts';
 import { useDarkMode } from '../../context/DarkModeContext';
 import { IBooking } from '../../interfaces/booking.ts';
 
@@ -125,15 +118,10 @@ const prepareData = (startData: IStartData[], stays: IBooking[]) => {
   // A bit ugly code, but sometimes this is what it takes when working with real data
 
   const incArrayValue = (arr: IStartData[], field: string) => {
-    console.log(arr);
-    return arr.map(obj =>
-      obj.duration === field ? { ...obj, value: obj.value + 1 } : obj
-    );
+    return arr.map((obj) => (obj.duration === field ? { ...obj, value: obj.value + 1 } : obj));
   };
   const data = stays
     .reduce((arr, cur) => {
-      console.log(arr);
-      console.log(cur);
       const num = cur.numNights;
       if (num === 1) return incArrayValue(arr, '1 night');
       if (num === 2) return incArrayValue(arr, '2 nights');
@@ -145,7 +133,7 @@ const prepareData = (startData: IStartData[], stays: IBooking[]) => {
       if (num >= 21) return incArrayValue(arr, '21+ nights');
       return arr;
     }, startData)
-    .filter(obj => obj.value > 0);
+    .filter((obj) => obj.value > 0);
 
   return data;
 };
@@ -168,24 +156,14 @@ const DurationChart = ({ confirmedStays }: { confirmedStays: IBooking[] }) => {
             outerRadius={110}
             cx="40%"
             cy="50%"
-            paddingAngle={3}>
-            {data.map(entry => (
-              <Cell
-                fill={entry.color}
-                stroke={entry.color}
-                key={entry.duration}
-              />
+            paddingAngle={3}
+          >
+            {data.map((entry) => (
+              <Cell fill={entry.color} stroke={entry.color} key={entry.duration} />
             ))}
           </Pie>
           <Tooltip />
-          <Legend
-            verticalAlign="middle"
-            align="right"
-            width={30}
-            layout="vertical"
-            iconSize={15}
-            iconType="circle"
-          />
+          <Legend verticalAlign="middle" align="right" layout="vertical" iconSize={15} iconType="circle" />
         </PieChart>
       </ResponsiveContainer>
     </ChartBox>
