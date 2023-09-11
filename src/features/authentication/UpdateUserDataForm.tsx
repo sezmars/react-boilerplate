@@ -10,11 +10,11 @@ import { useUser } from './useUser';
 import { useUpdateUser } from './useUpdateUser';
 
 const UpdateUserDataForm = () => {
-  const user = useUser()?.user;
-
+  const { user } = useUser();
+  console.log(user);
   const { updateUser, isUpdating } = useUpdateUser();
 
-  const [fullName, setFullName] = useState(user?.user_metadata?.currentFullName);
+  const [fullName, setFullName] = useState(user?.user_metadata?.fullName);
   const [avatar, setAvatar] = useState<File | null>(null);
 
   const handleSubmit = (e: ChangeEvent<HTMLFormElement>) => {
@@ -32,7 +32,7 @@ const UpdateUserDataForm = () => {
   };
 
   const handleCancel = () => {
-    setFullName(user?.user_metadata?.currentFullName);
+    setFullName(user?.user_metadata?.fullName);
     setAvatar(null);
   };
 
