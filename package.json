@@ -5,7 +5,7 @@
   "type": "module",
   "homepage": "https://sezmars.github.io/react-boilerplate/",
   "scripts": {
-    "predeploy": "npm run build",
+    "predeploy": "npm run build && cp dist/index.html dist/404.html",
     "deploy": "gh-pages -d dist",
     "dev": "vite",
     "build": "tsc && vite build",
