@@ -120,6 +120,7 @@ const GlobalStyles = createGlobalStyle`
     transition: color 0.3s, background-color 0.3s;
     line-height: 1.5;
     font-size: 1.6rem;
+    background-color: var(--color-grey-0);
   }
 
   input,
