@@ -16,7 +16,12 @@ const Img = styled.img`
   aspect-ratio: 3 / 2;
   object-fit: cover;
   object-position: center;
+  margin-left: 10px;
   transform: scale(1.5) translateX(-7px);
+
+  @media (max-width: 480px) {
+    width: 2.4rem;
+  }
 `;
 
 const Cabin = styled.div`
@@ -41,15 +46,7 @@ export default function CabinRow({ cabin }: { cabin: ICabin }) {
   const { isDeleting, deleteCabin } = useDeleteCabin();
   const { createCabin } = useCreateCabin();
 
-  const {
-    id: cabinId,
-    name,
-    maxCapacity,
-    regularPrice,
-    discount,
-    image,
-    description,
-  } = cabin;
+  const { id: cabinId, name, maxCapacity, regularPrice, discount, image, description } = cabin;
 
   const handleDuplicate = () => {
     createCabin({
@@ -68,11 +65,7 @@ export default function CabinRow({ cabin }: { cabin: ICabin }) {
       <Cabin>{name}</Cabin>
       <div>First up to {maxCapacity} guest</div>
       <Price>{formatCurrency(regularPrice)}</Price>
-      {discount ? (
-        <Discount>{formatCurrency(discount)}</Discount>
-      ) : (
-        <span>&mdash;</span>
-      )}
+      {discount ? <Discount>{formatCurrency(discount)}</Discount> : <span>&mdash;</span>}
       <div>
         <Modal>
           <Menus.Menu>
@@ -97,11 +90,7 @@ export default function CabinRow({ cabin }: { cabin: ICabin }) {
             </Modal.Window>
 
             <Modal.Window name="delete">
-              <ConfirmDelete
-                resourceName="cabins"
-                disabled={isDeleting}
-                onConfirm={() => deleteCabin(cabinId)}
-              />
+              <ConfirmDelete resourceName="cabins" disabled={isDeleting} onConfirm={() => deleteCabin(cabinId)} />
             </Modal.Window>
           </Menus.Menu>
         </Modal>

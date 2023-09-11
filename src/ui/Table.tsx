@@ -11,6 +11,10 @@ const StyledTable = styled.div`
   background-color: var(--color-grey-0);
   border-radius: 7px;
   overflow: hidden;
+
+  @media (max-width: 768px) {
+    overflow: scroll;
+  }
 `;
 
 interface CommonRowProps {
@@ -23,6 +27,18 @@ const CommonRow = styled.div<CommonRowProps>`
   column-gap: 2.4rem;
   align-items: center;
   transition: none;
+
+  @media (max-width: 768px) {
+    //  column-gap: 4rem;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  * {
+    width: fit-content;
+    //  min-width: fit-content;
+    //  max-width: 200px;
+  }
 `;
 
 const StyledHeader = styled(CommonRow)`
@@ -37,6 +53,10 @@ const StyledHeader = styled(CommonRow)`
 
 const StyledRow = styled(CommonRow)`
   padding: 1.2rem 2.4rem;
+
+  @media (max-width: 768px) {
+    padding: 1rem;
+  }
 
   &:not(:last-child) {
     border-bottom: 1px solid var(--color-grey-100);

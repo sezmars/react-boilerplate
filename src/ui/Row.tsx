@@ -7,14 +7,18 @@ interface RowProps {
 const Row = styled.div<RowProps>`
   display: flex;
 
-  ${props =>
+  ${(props) =>
     props.type === 'horizontal' &&
     css`
       justify-content: space-between;
       align-items: center;
+
+      @media (max-width: 480px) {
+        flex-direction: column;
+      }
     `}
 
-  ${props =>
+  ${(props) =>
     props.type === 'vertical' &&
     css`
       flex-direction: column;
