@@ -15,22 +15,18 @@ const CabinTable = () => {
   if (!cabins?.length) return <Empty resourceName="cabins" />;
 
   // 1) FILTER
-  const filterValue = searchParams.get('discount') || 'all';
+  const filterValue = searchParams.get('discount') || FilterCabin.all;
 
   let filteredCabins;
   if (filterValue === FilterCabin.all) filteredCabins = cabins;
-  if (filterValue === FilterCabin.noDiscount)
-    filteredCabins = cabins?.filter(cabin => cabin.discount === 0);
-  if (filterValue === FilterCabin.withDiscount)
-    filteredCabins = cabins?.filter(cabin => cabin.discount > 0);
+  if (filterValue === FilterCabin.noDiscount) filteredCabins = cabins?.filter((cabin) => cabin.discount === 0);
+  if (filterValue === FilterCabin.withDiscount) filteredCabins = cabins?.filter((cabin) => cabin.discount > 0);
 
   // 2) SORT
   const sortBy = searchParams.get('sortBy') || 'startDate-asc';
   const [field, direction] = sortBy.split('-');
   const modifier = direction === 'asc' ? 1 : -1;
-  const sortedCabins = filteredCabins?.sort(
-    (a, b) => ((a as never)[field] - (b as never)[field]) * modifier
-  );
+  const sortedCabins = filteredCabins?.sort((a, b) => ((a as never)[field] - (b as never)[field]) * modifier);
 
   return (
     <Menus>
@@ -48,7 +44,7 @@ const CabinTable = () => {
           // data={cabins}
           // data={filteredCabins}
           data={sortedCabins}
-          render={cabin => <CabinRow cabin={cabin} key={cabin.id} />}
+          render={(cabin) => <CabinRow cabin={cabin} key={cabin.id} />}
         />
       </Table>
     </Menus>

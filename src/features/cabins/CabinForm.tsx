@@ -1,8 +1,8 @@
 import Input from '../../ui/Input';
-import Form from '../../ui/Form.js';
-import Button from '../../ui/Button.js';
-import FileInput from '../../ui/FileInput.js';
-import Textarea from '../../ui/Textarea.js';
+import Form from '../../ui/Form.tsx';
+import Button from '../../ui/Button.tsx';
+import FileInput from '../../ui/FileInput.tsx';
+import Textarea from '../../ui/Textarea.tsx';
 import { useForm } from 'react-hook-form';
 import { ICabin } from '../../interfaces/cabin.ts';
 import FormRow from '../../ui/FormRow.tsx';
@@ -39,7 +39,7 @@ const CabinForm = ({
             reset();
             onCloseModal?.();
           },
-        }
+        },
       );
     else
       createCabin(
@@ -49,16 +49,14 @@ const CabinForm = ({
             reset();
             onCloseModal?.();
           },
-        }
+        },
       );
   };
 
   const onError = () => {};
 
   return (
-    <Form
-      onSubmit={handleSubmit(onSubmit, onError)}
-      type={onCloseModal ? 'modal' : 'regular'}>
+    <Form onSubmit={handleSubmit(onSubmit, onError)} type={onCloseModal ? 'modal' : 'regular'}>
       <FormRow label="Cabine name" error={errors.name?.message?.toString()}>
         <Input
           type="text"
@@ -70,9 +68,7 @@ const CabinForm = ({
         />
       </FormRow>
 
-      <FormRow
-        label="Maximum capacity"
-        error={errors.maxCapacity?.message?.toString()}>
+      <FormRow label="Maximum capacity" error={errors.maxCapacity?.message?.toString()}>
         <Input
           type="number"
           id="maxCapacity"
@@ -87,9 +83,7 @@ const CabinForm = ({
         />
       </FormRow>
 
-      <FormRow
-        label="Regular price"
-        error={errors.regularPrice?.message?.toString()}>
+      <FormRow label="Regular price" error={errors.regularPrice?.message?.toString()}>
         <Input
           type="number"
           id="regularPrice"
@@ -112,16 +106,12 @@ const CabinForm = ({
           defaultValue={0}
           {...register('discount', {
             required: 'This field is requried',
-            validate: value =>
-              +value! <= +getValues().regularPrice! ||
-              'Discount should be less than regular price',
+            validate: (value) => +value! <= +getValues().regularPrice! || 'Discount should be less than regular price',
           })}
         />
       </FormRow>
 
-      <FormRow
-        label="Description for website"
-        error={errors.description?.message?.toString()}>
+      <FormRow label="Description for website" error={errors.description?.message?.toString()}>
         <Textarea
           id="description"
           disabled={isWorking}
@@ -143,15 +133,10 @@ const CabinForm = ({
       </FormRow>
 
       <FormRow>
-        <Button
-          variation="secondary"
-          type="reset"
-          onClick={() => onCloseModal?.()}>
+        <Button variation="secondary" type="reset" onClick={() => onCloseModal?.()}>
           Cancel
         </Button>
-        <Button disabled={isWorking}>
-          {editId ? 'Edit Cabin' : 'Create new cabin'}
-        </Button>
+        <Button disabled={isWorking}>{editId ? 'Edit Cabin' : 'Create new cabin'}</Button>
       </FormRow>
     </Form>
   );

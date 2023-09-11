@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-hot-toast';
 import { deleteCabin as deleteCabinApi } from '../../services/apiCabins';
+import { Api } from '../../utils/enums.ts';
 
 export const useDeleteCabin = () => {
   const queryClient = useQueryClient();
@@ -11,10 +12,10 @@ export const useDeleteCabin = () => {
       toast.success('Cabin successfully deleted');
 
       await queryClient.invalidateQueries({
-        queryKey: ['cabins'],
+        queryKey: [Api.cabins],
       });
     },
-    onError: err => toast.error(err as string),
+    onError: (err) => toast.error(err as string),
   });
 
   return { isDeleting, deleteCabin };
