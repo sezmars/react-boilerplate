@@ -1,6 +1,6 @@
 import BookingRow from './BookingRow';
-import Table from '../../ui/Table.js';
-import Menus from '../../ui/Menus.js';
+import Table from '../../ui/Table.tsx';
+import Menus from '../../ui/Menus.tsx';
 import { useBookings } from './useBookings.ts';
 import Spinner from '../../ui/Spinner.tsx';
 import Empty from '../../ui/Empty.tsx';
@@ -24,14 +24,11 @@ export const BookingTable = () => {
           <div></div>
         </Table.Header>
 
-        <Table.Body
-          data={bookings}
-          render={booking => <BookingRow key={booking.id} booking={booking} />}
-        />
+        <Table.Body data={bookings} render={(booking) => <BookingRow key={booking.id} booking={booking} />} />
       </Table>
 
       <Table.Footer>
-        <Pagination count={count} />
+        <Pagination count={+count!} />
       </Table.Footer>
     </Menus>
   );

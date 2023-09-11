@@ -12,7 +12,7 @@ export const useBooking = () => {
     error,
   } = useQuery({
     queryKey: [Api.bookings, bookingId],
-    queryFn: () => getBooking(bookingId),
+    queryFn: () => getBooking(bookingId!),
     retry: false,
   });
 

@@ -1,6 +1,7 @@
 import SortBy from '../../ui/SortBy';
-import Filter from '../../ui/Filter.js';
-import TableOperations from '../../ui/TableOperations.js';
+import Filter from '../../ui/Filter.tsx';
+import TableOperations from '../../ui/TableOperations.tsx';
+import { SortBooking, Status } from '../../utils/enums.ts';
 
 const BookingTableOperations = () => {
   return (
@@ -8,22 +9,22 @@ const BookingTableOperations = () => {
       <Filter
         filterField="status"
         options={[
-          { value: 'all', label: 'All' },
-          { value: 'checked-out', label: 'Checked out' },
-          { value: 'checked-in', label: 'Checked in' },
-          { value: 'unconfirmed', label: 'Unconfirmed' },
+          { value: Status.all, label: 'All' },
+          { value: Status.checkedOut, label: 'Checked out' },
+          { value: Status.checkedIn, label: 'Checked in' },
+          { value: Status.unconfirmed, label: 'Unconfirmed' },
         ]}
       />
 
       <SortBy
         options={[
-          { value: 'startDate-desc', label: 'Sort by date (recent first)' },
-          { value: 'startDate-asc', label: 'Sort by date (earlier first)' },
+          { value: SortBooking.startDateDesc, label: 'Sort by date (recent first)' },
+          { value: SortBooking.startDateAsc, label: 'Sort by date (earlier first)' },
           {
-            value: 'totalPrice-desc',
+            value: SortBooking.totalPriceDesc,
             label: 'Sort by amount (high first)',
           },
-          { value: 'totalPrice-asc', label: 'Sort by amount (low first)' },
+          { value: SortBooking.totalPriceAsc, label: 'Sort by amount (low first)' },
         ]}
       />
     </TableOperations>
