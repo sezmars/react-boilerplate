@@ -45,6 +45,16 @@ const Error = styled.span`
   color: var(--color-red-700);
 `;
 
+const ContainerError = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: end;
+  @media (max-width: 768px) {
+    align-items: center;
+  }
+`;
+
 interface FormRowProps {
   label?: string;
   error?: string;
@@ -55,8 +65,10 @@ const FormRow = ({ label, error, children }: FormRowProps) => {
   return (
     <StyledFormRow>
       {label && <Label htmlFor={(children as ReactElement)?.props.id}>{label}</Label>}
-      {children}
-      {error && <Error>{error}</Error>}
+      <ContainerError>
+        {children}
+        {error && <Error>{error}</Error>}
+      </ContainerError>
     </StyledFormRow>
   );
 };
