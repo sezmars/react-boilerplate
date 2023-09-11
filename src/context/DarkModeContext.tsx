@@ -9,7 +9,7 @@ const DarkModeContext = createContext<{
 const DarkModeProvider = ({ children }: { children: React.JSX.Element }) => {
   const [isDarkMode, setIsDarkMode] = useLocalStorageState(
     window.matchMedia('(prefers-color-scheme: dark)').matches,
-    'isDarkMode'
+    'isDarkMode',
   );
 
   useEffect(() => {
@@ -26,17 +26,12 @@ const DarkModeProvider = ({ children }: { children: React.JSX.Element }) => {
     setIsDarkMode((isDark: string) => !isDark);
   };
 
-  return (
-    <DarkModeContext.Provider value={{ isDarkMode, toggleDarkMode }}>
-      {children}
-    </DarkModeContext.Provider>
-  );
+  return <DarkModeContext.Provider value={{ isDarkMode, toggleDarkMode }}>{children}</DarkModeContext.Provider>;
 };
 
 const useDarkMode = () => {
   const context = useContext(DarkModeContext);
-  if (context === undefined)
-    throw new Error('DarkModeContext was used outside of DarkModeProvider');
+  if (context === undefined) throw new Error('DarkModeContext was used outside of DarkModeProvider');
   return context;
 };
 
