@@ -3,7 +3,7 @@ import Row from '../ui/Row';
 import { BookingTable } from '../features/bookings/BookingTable.tsx';
 import BookingTableOperations from '../features/bookings/BookingTableOperations.tsx';
 
-export const Bookings = () => {
+const Bookings = () => {
   return (
     <>
       <Row type="horizontal">
@@ -15,3 +15,5 @@ export const Bookings = () => {
     </>
   );
 };
+
+export default Bookings;
