@@ -45,11 +45,7 @@ export const logout = async () => {
   if (error) throw new Error(error.message);
 };
 
-export const updateCurrentUser = async ({
-  password,
-  fullName,
-  avatar,
-}: Partial<IUser>) => {
+export const updateCurrentUser = async ({ password, fullName, avatar }: Partial<IUser>) => {
   // 1. Update password OR fullName
   let updateData;
   if (password) updateData = { password };
@@ -63,9 +59,7 @@ export const updateCurrentUser = async ({
   // 2. Upload the avatar image
   const fileName = `avatar-${data.user.id}-${Math.random()}`;
 
-  const { error: storageError } = await supabase.storage
-    .from(Api.avatars)
-    .upload(fileName, avatar);
+  const { error: storageError } = await supabase.storage.from(Api.avatars).upload(fileName, avatar);
 
   if (storageError) throw new Error(storageError.message);
 

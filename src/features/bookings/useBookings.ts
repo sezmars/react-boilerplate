@@ -4,7 +4,7 @@ import { useSearchParams } from 'react-router-dom';
 import { PAGE_SIZE } from '../../utils/constants';
 import { Api, SortBooking, Status } from '../../utils/enums.ts';
 
-export const useBookings = () => {
+export const useBookings = async () => {
   const queryClient = useQueryClient();
   const [searchParams] = useSearchParams();
 
@@ -34,13 +34,13 @@ export const useBookings = () => {
   const pageCount = Math.ceil(count ? count : 0 / PAGE_SIZE);
 
   if (page < pageCount)
-    queryClient.prefetchQuery({
+    await queryClient.prefetchQuery({
       queryKey: [Api.bookings, filter, sortBy, page + 1],
       queryFn: () => getBookings({ filter, sortBy, page: page + 1 }),
     });
 
   if (page > 1)
-    queryClient.prefetchQuery({
+    await queryClient.prefetchQuery({
       queryKey: [Api.bookings, filter, sortBy, page - 1],
       queryFn: () => getBookings({ filter, sortBy, page: page - 1 }),
     });

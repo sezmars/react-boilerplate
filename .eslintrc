@@ -1,11 +1,17 @@
 {
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+    "project": ["./tsconfig.json", "./tsconfig.node.json"],
+    "tsconfigRootDir": ""
+  },
   "extends": [
+    "plugin:@typescript-eslint/recommended-type-checked",
     "eslint:recommended",
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
     "plugin:import/recommended",
     "plugin:jsx-a11y/recommended",
-    "plugin:@typescript-eslint/recommended",
     "eslint-config-prettier"
   ],
   "settings": {
@@ -27,6 +33,7 @@
     }
   },
   "rules": {
+    "@typescript-eslint/await-thenable": "error",
     "import/no-named-as-default": 0,
     "no-unused-vars": "off",
     "import/named": "off",
@@ -35,6 +42,17 @@
       "error",
       "expression",
       { "allowArrowFunctions": true }
-    ]
+    ],
+    "no-undef" : "off",
+    "@typescript-eslint/no-undef" : "off",
+    "@typescript-eslint/no-unsafe-call" : "off",
+    "@typescript-eslint/no-unsafe-return" : "off",
+    "@typescript-eslint/no-unsafe-argument" : "off",
+    "@typescript-eslint/no-misused-promises" : "off",
+    "@typescript-eslint/no-unsafe-assignment" : "off",
+    "@typescript-eslint/no-unsafe-member-access" : "off",
+    "@typescript-eslint/no-unsafe-enum-comparison" : "off",
+    "@typescript-eslint/no-unnecessary-type-assertion" : "off"
+
   }
 }

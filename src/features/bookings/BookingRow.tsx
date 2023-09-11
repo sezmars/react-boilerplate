@@ -82,18 +82,18 @@ const BookingRow = ({ booking }: { booking: any }) => {
           &rarr; {numNights} night stay
         </span>
         <span>
-          {format(new Date(startDate!), 'MMM dd yyyy')} &mdash; {format(new Date(endDate!), 'MMM dd yyyy')}
+          {format(new Date(startDate), 'MMM dd yyyy')} &mdash; {format(new Date(endDate), 'MMM dd yyyy')}
         </span>
       </Stacked>
 
-      <Tag type={statusToTagName[status!]}>{status?.replace('-', ' ')}</Tag>
+      <Tag type={statusToTagName[status]}>{status?.replace('-', ' ')}</Tag>
 
-      <Amount>{formatCurrency(totalPrice!)}</Amount>
+      <Amount>{formatCurrency(totalPrice)}</Amount>
 
       <Modal>
         <Menus.Menu>
-          <Menus.Toggle id={bookingId!} />
-          <Menus.List id={bookingId!}>
+          <Menus.Toggle id={bookingId} />
+          <Menus.List id={bookingId}>
             <Menus.Button icon={<HiEye />} onClick={() => navigate(`/bookings/${bookingId}`)}>
               See details
             </Menus.Button>
@@ -107,7 +107,7 @@ const BookingRow = ({ booking }: { booking: any }) => {
             )}
 
             {status === 'checked-in' ? (
-              <Menus.Button icon={<HiArrowUpOnSquare />} onClick={() => checkout(+bookingId!)} disabled={isCheckingOut}>
+              <Menus.Button icon={<HiArrowUpOnSquare />} onClick={() => checkout(+bookingId)} disabled={isCheckingOut}>
                 Check out
               </Menus.Button>
             ) : (
@@ -121,7 +121,7 @@ const BookingRow = ({ booking }: { booking: any }) => {
         </Menus.Menu>
 
         <Modal.Window name="delete">
-          <ConfirmDelete resourceName="booking" disabled={isDeleting} onConfirm={() => deleteBooking(+bookingId!)} />
+          <ConfirmDelete resourceName="booking" disabled={isDeleting} onConfirm={() => deleteBooking(+bookingId)} />
         </Modal.Window>
       </Modal>
     </Table.Row>
