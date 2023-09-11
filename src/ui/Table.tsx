@@ -29,15 +29,12 @@ const CommonRow = styled.div<CommonRowProps>`
   transition: none;
 
   @media (max-width: 768px) {
-    //  column-gap: 4rem;
     display: flex;
     justify-content: space-between;
   }
 
   * {
     width: fit-content;
-    //  min-width: fit-content;
-    //  max-width: 200px;
   }
 `;
 

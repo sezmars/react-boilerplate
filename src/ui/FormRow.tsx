@@ -2,26 +2,15 @@ import styled from 'styled-components';
 import { ReactElement, ReactNode } from 'react';
 
 const StyledFormRow = styled.div`
-  /*display: grid;
-  align-items: center;
-  grid-template-columns: 24rem 1fr 1.2fr;
-  gap: 2.4rem;
-
-  padding: 1.2rem 0;*/
-
   display: flex;
-  /* gap: 10px; */
   text-align: center;
-  // flex-wrap: wrap;
   justify-content: space-between;
-  /* display: grid; */
   align-items: center;
   grid-template-columns: 24rem 1fr 1.2fr;
   gap: 2.4rem;
   padding: 1.2rem 0;
 
   @media (max-width: 768px) {
-    // justify-content: center;
     flex-wrap: wrap;
     justify-content: center;
     flex-direction: column;
