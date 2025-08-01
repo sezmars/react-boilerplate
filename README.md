@@ -18,7 +18,9 @@ Run `npm run dev` for a dev server. Navigate to `http://localhost:5173/`. The ap
 - Recharts
 - Vite
 
-## Credentials for Demo
+## Demo credentials are out of date
+
+[Please read](https://github.com/sezmars/react-boilerplate/issues/2)
 
 | Email Address   | Password |
 |-----------------| -------- |
